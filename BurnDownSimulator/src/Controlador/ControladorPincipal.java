@@ -14,7 +14,6 @@ public class ControladorPincipal implements ActionListener {
 	public ControladorPincipal(){
 		this.vp=new VistaPrincipal();
 		vp.setSize(600, 400);
-		//vp.mnNewMenu.setVisible(true);
 		vp.frmBurndownsimulator.setVisible(true);
 		addListener();
 	}
