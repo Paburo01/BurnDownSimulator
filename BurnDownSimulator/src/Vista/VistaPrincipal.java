@@ -8,7 +8,9 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.BorderLayout;
+import java.util.ArrayList;
 
+import Modelo.Tarea;
 public class VistaPrincipal extends javax.swing.JFrame{
 
 	public JFrame frmBurndownsimulator;
@@ -22,6 +24,8 @@ public class VistaPrincipal extends javax.swing.JFrame{
 	public JMenu mnNewMenu;
 	public JTable table;
 	public DefaultTableModel modeloTabla;
+	public ArrayList<Tarea> tareas;
+	public String diaActual;
 	
 	/**
 	 * Create the application.
@@ -34,6 +38,7 @@ public class VistaPrincipal extends javax.swing.JFrame{
         }
     };
 		initialize();
+		tareas= new ArrayList<>();
 	}
 
 	/**

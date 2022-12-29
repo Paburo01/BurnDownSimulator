@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import Vista.CambiarDeDia;
 import Vista.VistaPrincipal;
 import Modelo.Tarea;
 
@@ -13,6 +14,7 @@ public class ControladorPincipal implements ActionListener {
 	private VistaPrincipal vp;
 	private ArrayList<Tarea> tareas;
 	private int currentID;
+	private CambiarDeDia cambiarD;
 	
 	public ControladorPincipal(){
 		this.vp = new VistaPrincipal();
@@ -54,6 +56,9 @@ public class ControladorPincipal implements ActionListener {
 			case "Nueva pila":
 				break;
 			case "Pasar de día":
+				cambiarD= new CambiarDeDia();
+				cambiarD.lblNewLabel_2.setText(vp.diaActual);
+				cambiarD.setVisible(true);
 				break;
 			case "Visualizar gráficos":
 				break;
