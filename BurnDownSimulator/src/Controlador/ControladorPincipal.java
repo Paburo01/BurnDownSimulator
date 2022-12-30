@@ -3,11 +3,9 @@ package Controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Scanner;
-
 import Vista.CambiarDeDia;
 import Vista.VistaPrincipal;
+import Vista.VistaTareas;
 import Modelo.Tarea;
 
 public class ControladorPincipal implements ActionListener {
@@ -16,9 +14,11 @@ public class ControladorPincipal implements ActionListener {
 	private int currentID;
 	private CambiarDeDia cambiarD;
 	private ControladorSecundario controladorS;
+	private VistaTareas vTareas;
 	
 	public ControladorPincipal(){
 		this.vp = new VistaPrincipal();
+		this.cambiarD= new CambiarDeDia();
 		this.vp.tareas = new ArrayList<>();
 		for(int i=0 ; i<5; i++) {
 			Tarea t=new Tarea();
@@ -28,7 +28,7 @@ public class ControladorPincipal implements ActionListener {
 		}
 		vp.frmBurndownsimulator.setVisible(true);
 		addListener();
-		currentID = 1;
+		currentID = 0;
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -36,25 +36,9 @@ public class ControladorPincipal implements ActionListener {
 			case "Abrir pila":
 				break;
 			case "Añadir tarea":
-				Tarea nueva = new Tarea();
-				Scanner sc = new Scanner(System.in);
-				Scanner num = new Scanner(System.in);
-				nueva.setID(currentID++);
-				System.out.println("Introduzca la descripción o nombre de la tarea: ");
-				nueva.setTarea(sc.nextLine());
-				System.out.println("Introduzca el tipo de la tarea (o -1 para dejar vacío): ");
-				String tipo;
-				tipo = sc.nextLine();
-				if (tipo.equals("-1"))
-					nueva.setTipo("Campo vacío");
-				else nueva.setTipo(tipo);
-				nueva.setEstado("Pendiente");
-				System.out.println("Introduzca el responsable de la tarea: ");
-				nueva.setResponsable(sc.nextLine());
-				System.out.println("Introduzca el esfuerzo estimado de la tarea: ");
-				nueva.addRestante(num.nextInt());
-				vp.tareas.add(nueva);
-				mostrarTareas();
+				vTareas = new VistaTareas();
+				controladorS = new ControladorSecundario(vp, cambiarD, vTareas);
+				vTareas.setVisible(true);
 				break;
 			case "Establecer Fechas":
 				break;
@@ -64,7 +48,7 @@ public class ControladorPincipal implements ActionListener {
 				break;
 			case "Pasar de día":
 				cambiarD= new CambiarDeDia();
-				controladorS= new ControladorSecundario(vp, cambiarD);
+				controladorS= new ControladorSecundario(vp, cambiarD, vTareas);
 				cambiarD.lblNewLabel_2.setText(vp.diaActual);
 				for(int i=0; i<vp.tareas.size(); i++) {
 					cambiarD.comboBox.addItem(vp.tareas.get(i).getTarea());
@@ -72,6 +56,7 @@ public class ControladorPincipal implements ActionListener {
 				cambiarD.setVisible(true);
 				break;
 			case "Visualizar gráficos":
+				
 				break;
 		}
 	}
@@ -97,3 +82,5 @@ public class ControladorPincipal implements ActionListener {
 		}
 	}
 }
+
+

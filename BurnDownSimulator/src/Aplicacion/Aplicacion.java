@@ -6,6 +6,5 @@ import Vista.VistaPrincipal;
 public class Aplicacion {
 	public static void main(String[] args) {
 		ControladorPincipal controlador=new ControladorPincipal();
-		
 	}
 }

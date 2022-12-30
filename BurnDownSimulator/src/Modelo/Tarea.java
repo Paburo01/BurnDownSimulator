@@ -10,6 +10,7 @@ public class Tarea {
 	private String estado;
 	private String responsable;
 	private ArrayList<Integer> restante;
+	private String descripcion;
 	
 	public Tarea() {
 		this.restante = new ArrayList<Integer>();
@@ -58,5 +59,13 @@ public class Tarea {
 	
 	public void addRestante(int restante) {
 		this.restante.add(restante);
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 }
