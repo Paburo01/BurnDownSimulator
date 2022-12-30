@@ -14,8 +14,11 @@ import javax.swing.JButton;
 public class CambiarDeDia extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
+	public JTextField IntroducirHorasRestantes;
 	public JLabel lblNewLabel_2;
+	public JComboBox comboBox;
+	public JButton ActualizarTareaPasarDeDia;
+	public JButton FinalizarPasarDeDia;
 
 	/**
 	 * Launch the application.
@@ -46,30 +49,36 @@ public class CambiarDeDia extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(84, 46, 30, 22);
+		comboBox = new JComboBox();
+		comboBox.setBounds(64, 71, 61, 22);
 		contentPane.add(comboBox);
 		
 		JLabel lblNewLabel = new JLabel("Horas restantes");
 		lblNewLabel.setBounds(263, 46, 82, 14);
 		contentPane.add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setBounds(259, 72, 86, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		IntroducirHorasRestantes = new JTextField();
+		IntroducirHorasRestantes.setBounds(259, 72, 86, 20);
+		contentPane.add(IntroducirHorasRestantes);
+		IntroducirHorasRestantes.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Dia Actual: ");
-		lblNewLabel_1.setBounds(84, 161, 61, 14);
+		lblNewLabel_1.setBounds(64, 161, 81, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setBounds(155, 161, 82, 14);
 		contentPane.add(lblNewLabel_2);
 		
-		JButton aceptarPasarDeDia = new JButton("Aceptar");
-		aceptarPasarDeDia.setBounds(263, 157, 89, 23);
-		contentPane.add(aceptarPasarDeDia);
+		ActualizarTareaPasarDeDia = new JButton("Actualizar Tarea");
+		ActualizarTareaPasarDeDia.setBounds(263, 157, 129, 23);
+		contentPane.add(ActualizarTareaPasarDeDia);
+		
+		FinalizarPasarDeDia = new JButton("Finalizar");
+		FinalizarPasarDeDia.setBounds(306, 191, 86, 23);
+		contentPane.add(FinalizarPasarDeDia);
 	}
 	
+
+
 }

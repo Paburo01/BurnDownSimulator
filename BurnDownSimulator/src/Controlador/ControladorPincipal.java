@@ -3,6 +3,7 @@ package Controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 import Vista.CambiarDeDia;
@@ -12,13 +13,19 @@ import Modelo.Tarea;
 public class ControladorPincipal implements ActionListener {
 	
 	private VistaPrincipal vp;
-	private ArrayList<Tarea> tareas;
 	private int currentID;
 	private CambiarDeDia cambiarD;
+	private ControladorSecundario controladorS;
 	
 	public ControladorPincipal(){
 		this.vp = new VistaPrincipal();
-		this.tareas = new ArrayList<Tarea>();
+		this.vp.tareas = new ArrayList<>();
+		for(int i=0 ; i<5; i++) {
+			Tarea t=new Tarea();
+			t.setTarea(i+" tarea");
+			t.addRestante(20);
+			vp.tareas.add(t);
+		}
 		vp.frmBurndownsimulator.setVisible(true);
 		addListener();
 		currentID = 1;
@@ -46,7 +53,7 @@ public class ControladorPincipal implements ActionListener {
 				nueva.setResponsable(sc.nextLine());
 				System.out.println("Introduzca el esfuerzo estimado de la tarea: ");
 				nueva.addRestante(num.nextInt());
-				tareas.add(nueva);
+				vp.tareas.add(nueva);
 				mostrarTareas();
 				break;
 			case "Establecer Fechas":
@@ -57,7 +64,11 @@ public class ControladorPincipal implements ActionListener {
 				break;
 			case "Pasar de día":
 				cambiarD= new CambiarDeDia();
+				controladorS= new ControladorSecundario(vp, cambiarD);
 				cambiarD.lblNewLabel_2.setText(vp.diaActual);
+				for(int i=0; i<vp.tareas.size(); i++) {
+					cambiarD.comboBox.addItem(vp.tareas.get(i).getTarea());
+				}
 				cambiarD.setVisible(true);
 				break;
 			case "Visualizar gráficos":
@@ -77,11 +88,11 @@ public class ControladorPincipal implements ActionListener {
 	
 	public void mostrarTareas() {
 		System.out.println(" ID /        TAREA        /    TIPO    /  ESTADO  / RESPONSABLE /     ESFUERZO");
-		for(int i = 0; i < tareas.size(); i++) {
-			System.out.print(" " + tareas.get(i).getID() + "  " + tareas.get(i).getTarea() + "   " + tareas.get(i).getTipo() +
-					"   " + tareas.get(i).getEstado() + "   " + tareas.get(i).getResponsable() + "  ");
-			for (int j = 0; j < tareas.get(i).getRestante().size(); j++)
-				System.out.print(tareas.get(i).getRestante(j) + " / ");
+		for(int i = 0; i < vp.tareas.size(); i++) {
+			System.out.print(" " + vp.tareas.get(i).getID() + "  " + vp.tareas.get(i).getTarea() + "   " + vp.tareas.get(i).getTipo() +
+					"   " + vp.tareas.get(i).getEstado() + "   " + vp.tareas.get(i).getResponsable() + "  ");
+			for (int j = 0; j < vp.tareas.get(i).getRestante().size(); j++)
+				System.out.print(vp.tareas.get(i).getRestante(j) + " / ");
 			System.out.println("");
 		}
 	}

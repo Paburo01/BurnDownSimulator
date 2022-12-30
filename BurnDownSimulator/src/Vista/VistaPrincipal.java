@@ -27,10 +27,14 @@ public class VistaPrincipal extends javax.swing.JFrame{
 	public ArrayList<Tarea> tareas;
 	public String diaActual;
 	
+	
 	/**
 	 * Create the application.
 	 */
 	public VistaPrincipal() {
+		//prueba---borrar
+		diaActual="22/12/22";
+		//------------------
 		modeloTabla = new DefaultTableModel(){
         @Override
         public boolean isCellEditable(int row, int column){

@@ -51,6 +51,11 @@ public class Tarea {
 	public int getRestante(int pos) {
 		return restante.get(pos);
 	}
+	
+	public int getRestanteUltimo() {
+		return restante.get(restante.size()-1);
+	}
+	
 	public void addRestante(int restante) {
 		this.restante.add(restante);
 	}
