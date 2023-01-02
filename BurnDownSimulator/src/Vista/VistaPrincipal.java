@@ -25,7 +25,8 @@ public class VistaPrincipal extends javax.swing.JFrame{
 	public JTable table;
 	public DefaultTableModel modeloTabla;
 	public ArrayList<Tarea> tareas;
-	public String diaActual;
+	private String diaActual;
+	private int duracion;
 	
 	
 	/**
@@ -33,7 +34,7 @@ public class VistaPrincipal extends javax.swing.JFrame{
 	 */
 	public VistaPrincipal() {
 		//prueba---borrar
-		diaActual="22/12/22";
+		setDiaActual("22/12/22");
 		//------------------
 		modeloTabla = new DefaultTableModel(){
         @Override
@@ -125,5 +126,21 @@ public class VistaPrincipal extends javax.swing.JFrame{
         	fila[5] = tiempo;
         	modeloTabla.addRow(fila);
         }
+	}
+
+	public String getDiaActual() {
+		return diaActual;
+	}
+
+	public void setDiaActual(String diaActual) {
+		this.diaActual = diaActual;
+	}
+
+	public int getDuracion() {
+		return duracion;
+	}
+
+	public void setDuracion(int duracion) {
+		this.duracion = duracion;
 	}
 }

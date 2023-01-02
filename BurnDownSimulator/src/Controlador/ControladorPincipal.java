@@ -6,6 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import Vista.CambiarDeDia;
+import Vista.EstablecerFechas;
 import Vista.VistaPrincipal;
 import Vista.VistaTareas;
 import Vista.VisualizacionTarea;
@@ -18,6 +19,7 @@ public class ControladorPincipal implements ActionListener {
 	private CambiarDeDia cambiarD;
 	private ControladorSecundario controladorS;
 	private VistaTareas vTareas;
+	private EstablecerFechas establecerF;
 	
 	public ControladorPincipal(){
 		this.vp = new VistaPrincipal();
@@ -43,8 +45,11 @@ public class ControladorPincipal implements ActionListener {
 				vTareas = new VistaTareas();
 				controladorS = new ControladorSecundario(vp, cambiarD, vTareas);
 				vTareas.setVisible(true);
-				break;
-			case "Establecer Fechas":
+				break;				
+			case "Establecer fechas":
+				establecerF= new EstablecerFechas();
+				controladorS = new ControladorSecundario(vp, establecerF);
+				establecerF.setVisible(true);
 				break;
 			case "Guardar pila":
 				break;
@@ -53,7 +58,7 @@ public class ControladorPincipal implements ActionListener {
 			case "Pasar de día":
 				cambiarD= new CambiarDeDia();
 				controladorS= new ControladorSecundario(vp, cambiarD, vTareas);
-				cambiarD.lblNewLabel_2.setText(vp.diaActual);
+				cambiarD.lblNewLabel_2.setText(vp.getDiaActual());
 				for(int i=0; i<vp.tareas.size(); i++) {
 					cambiarD.comboBox.addItem(vp.tareas.get(i).getTarea());
 				}
