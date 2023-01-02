@@ -41,8 +41,8 @@ public class VistaPrincipal extends javax.swing.JFrame{
             return false;
         }
     };
-		initialize();
 		tareas= new ArrayList<>();
+		initialize();
 	}
 
 	/**
@@ -87,7 +87,12 @@ public class VistaPrincipal extends javax.swing.JFrame{
 		table = new JTable();
 		table.setModel(modeloTabla);
         
-        String[] columnasTabla = {"ID","Tarea","Tipo","Estado","Responsable","Tiempo restante"};
+		frmBurndownsimulator.getContentPane().add(table, BorderLayout.CENTER);
+		
+	}
+	
+	public void dibujarTabla() {
+		String[] columnasTabla = {"ID","Tarea","Tipo","Estado","Responsable","Tiempo restante"};
         modeloTabla.setColumnIdentifiers(columnasTabla);
         
         table.getTableHeader().setResizingAllowed(false);
@@ -99,7 +104,26 @@ public class VistaPrincipal extends javax.swing.JFrame{
         table.getColumnModel().getColumn(3).setPreferredWidth(80);
         table.getColumnModel().getColumn(4).setPreferredWidth(100);
         table.getColumnModel().getColumn(5).setPreferredWidth(150);
-        
-		frmBurndownsimulator.getContentPane().add(table, BorderLayout.CENTER);
+
+        modeloTabla.addRow(columnasTabla);
+	}
+	
+	public void actualizarTabla() {
+		while (modeloTabla.getRowCount() > 1)
+			modeloTabla.removeRow(1);
+		
+		Object[] fila = new Object[6];
+        for (int i = 0; i < tareas.size(); i++) {
+        	fila[0] = tareas.get(i).getID();
+        	fila[1] = tareas.get(i).getTarea();
+        	fila[2] = tareas.get(i).getTipo();
+        	fila[3] = tareas.get(i).getEstado();
+        	fila[4] = tareas.get(i).getResponsable();
+        	String tiempo = "";
+        	for (int j = 0; j < tareas.get(i).getRestante().size(); j++)
+        		tiempo += tareas.get(i).getRestante(j) + " | ";
+        	fila[5] = tiempo;
+        	modeloTabla.addRow(fila);
+        }
 	}
 }

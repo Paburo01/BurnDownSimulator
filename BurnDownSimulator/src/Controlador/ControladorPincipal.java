@@ -2,10 +2,13 @@ package Controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import Vista.CambiarDeDia;
 import Vista.VistaPrincipal;
 import Vista.VistaTareas;
+import Vista.VisualizacionTarea;
 import Modelo.Tarea;
 
 public class ControladorPincipal implements ActionListener {
@@ -26,6 +29,7 @@ public class ControladorPincipal implements ActionListener {
 			t.addRestante(20);
 			vp.tareas.add(t);
 		}
+		vp.dibujarTabla();
 		vp.frmBurndownsimulator.setVisible(true);
 		addListener();
 		currentID = 0;
@@ -69,6 +73,12 @@ public class ControladorPincipal implements ActionListener {
 		vp.Nueva_pila.addActionListener(this);
 		vp.Pasar_de_dia.addActionListener(this);
 		vp.Visualizar_graficos.addActionListener(this);
+		vp.table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent evt) {
+				clickadoTabla(evt);
+			}
+		});
 	}
 	
 	public void mostrarTareas() {
@@ -79,6 +89,13 @@ public class ControladorPincipal implements ActionListener {
 			for (int j = 0; j < vp.tareas.get(i).getRestante().size(); j++)
 				System.out.print(vp.tareas.get(i).getRestante(j) + " / ");
 			System.out.println("");
+		}
+	}
+	
+	public void clickadoTabla(MouseEvent evt) {
+		if (vp.table.getSelectedRow() != 0) {
+			VisualizacionTarea t = new VisualizacionTarea(vp.tareas.get(vp.table.getSelectedRow() - 1));
+			t.setVisible(true);
 		}
 	}
 }
