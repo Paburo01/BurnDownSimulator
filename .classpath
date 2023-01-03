@@ -10,5 +10,6 @@
 	<classpathentry kind="lib" path="C:/Users/Usuario/git/BurnDownSimulator/BurnDownSimulator/BurnDownSimulator/jgoodies-common-1.2.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Usuario/git/BurnDownSimulator/BurnDownSimulator/BurnDownSimulator/jgoodies-looks-2.4.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Usuario/git/BurnDownSimulator/BurnDownSimulator/BurnDownSimulator/junit-4.6.jar"/>
+	<classpathentry kind="lib" path="jcalendar-1.4.jar"/>
 	<classpathentry kind="output" path="BurnDownSimulator/bin"/>
 </classpath>
