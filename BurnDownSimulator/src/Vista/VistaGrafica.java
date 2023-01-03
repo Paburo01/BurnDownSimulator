@@ -69,7 +69,7 @@ public class VistaGrafica extends JFrame {
 				cantidad += tareas.get(j).getRestante(i);
 			g.drawOval(50+(550/limite)*i, 300-cantidad, 5, 5);
 		}
-			
+		//////	
 	}
 	
 }
