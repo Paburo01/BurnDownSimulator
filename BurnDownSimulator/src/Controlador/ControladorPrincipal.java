@@ -4,22 +4,28 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
 import Vista.CambiarDeDia;
+import Vista.VistaGrafica;
 import Vista.VistaPrincipal;
 import Vista.VistaTareas;
 import Vista.VisualizacionTarea;
 import Modelo.Tarea;
 
-public class ControladorPincipal implements ActionListener {
+public class ControladorPrincipal implements ActionListener {
 	
 	private VistaPrincipal vp;
 	private int currentID;
 	private CambiarDeDia cambiarD;
 	private ControladorSecundario controladorS;
 	private VistaTareas vTareas;
+	private Date inicial;
 	
-	public ControladorPincipal(){
+	public ControladorPrincipal(){
 		this.vp = new VistaPrincipal();
 		this.cambiarD= new CambiarDeDia();
 		this.vp.tareas = new ArrayList<>();
@@ -45,6 +51,7 @@ public class ControladorPincipal implements ActionListener {
 				vTareas.setVisible(true);
 				break;
 			case "Establecer Fechas":
+				//date.parse(cadena de texto);
 				break;
 			case "Guardar pila":
 				break;
@@ -60,7 +67,15 @@ public class ControladorPincipal implements ActionListener {
 				cambiarD.setVisible(true);
 				break;
 			case "Visualizar gráficos":
-				
+				SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+			try {
+				inicial = date.parse("2023-01-02");
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+				VistaGrafica f = new VistaGrafica(inicial, 10, vp.tareas);
+				f.setVisible(true);
 				break;
 		}
 	}
