@@ -25,7 +25,7 @@ public class VistaPrincipal extends javax.swing.JFrame{
 	public JTable table;
 	public DefaultTableModel modeloTabla;
 	public ArrayList<Tarea> tareas;
-	private String diaActual;
+	public String diaActual;
 	private int duracion;
 	
 	

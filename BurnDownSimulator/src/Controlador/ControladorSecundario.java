@@ -42,6 +42,7 @@ public class ControladorSecundario implements ActionListener {
 		this.vp = vp;
 		modded = new ArrayList<Integer>();
 		addListener();
+		//aa
 	}
 
 	public void actionPerformed(ActionEvent e) {

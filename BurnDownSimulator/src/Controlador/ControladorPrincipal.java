@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import Vista.CambiarDeDia;
+import Vista.EstablecerFechas;
 import Vista.VistaGrafica;
 import Vista.VistaPrincipal;
 import Vista.VistaTareas;
@@ -24,6 +25,7 @@ public class ControladorPrincipal implements ActionListener {
 	private ControladorSecundario controladorS;
 	private VistaTareas vTareas;
 	private Date inicial;
+	private EstablecerFechas establecerF;
 	
 	public ControladorPrincipal(){
 		this.vp = new VistaPrincipal();
@@ -50,8 +52,11 @@ public class ControladorPrincipal implements ActionListener {
 				controladorS = new ControladorSecundario(vp, cambiarD, vTareas);
 				vTareas.setVisible(true);
 				break;
-			case "Establecer Fechas":
+			case "Establecer fechas":
 				//date.parse(cadena de texto);
+				establecerF= new EstablecerFechas();
+				controladorS = new ControladorSecundario(vp, establecerF);
+				establecerF.setVisible(true);
 				break;
 			case "Guardar pila":
 				break;
