@@ -4,10 +4,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 import Vista.CambiarDeDia;
 import Vista.EstablecerFechas;
@@ -59,6 +64,42 @@ public class ControladorPrincipal implements ActionListener {
 				establecerF.setVisible(true);
 				break;
 			case "Guardar pila":
+				String datos = 
+				"NAME : " + vp.nombre
+				+"FECHA_DE_INICIO: " + vp.FechaDeInicio
+                + "\nDURACION: " + vp.getDuracion()+"\n" ;
+				
+				for(int i=0; i<vp.tareas.size();i++) {
+						datos += vp.tareas.get(i).getID() + " - " + 
+					    vp.tareas.get(i).getTarea() + " - " + 
+						vp.tareas.get(i).getTipo() + " - " +
+					    vp.tareas.get(i).getEstado() + " - " +
+						vp.tareas.get(i).getResponsable() + " - ";
+						for(int j=0; j<vp.tareas.get(i).getRestante().size() ;j++) {
+							datos += vp.tareas.get(i).getRestante().get(j) + " - ";
+						}
+						datos+="/n";
+				}
+				
+				datos += "-1\n"
+		                + "EOF";
+				
+				File file = new File("./src/datos",vp.nombre+ ".tsp");
+				
+		        if (!file.exists()) {
+		            try {
+						file.createNewFile();
+						FileWriter fw = new FileWriter(file);
+				        BufferedWriter bw = new BufferedWriter(fw);
+				        bw.write(datos);
+				        bw.close();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+		        }
+				
+				
 				break;
 			case "Nueva pila":
 				break;

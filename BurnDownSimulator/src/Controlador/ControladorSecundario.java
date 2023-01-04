@@ -42,7 +42,6 @@ public class ControladorSecundario implements ActionListener {
 		this.vp = vp;
 		modded = new ArrayList<Integer>();
 		addListener();
-		//aa
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -57,6 +56,7 @@ public class ControladorSecundario implements ActionListener {
 		case "Actualizar Tarea":
 			int seleccionComboBox = cambiarD.comboBox.getSelectedIndex();
 			if(Integer.parseInt(cambiarD.IntroducirHorasRestantes.getText()) < vp.tareas.get(seleccionComboBox).getRestanteUltimo()) {
+				cambiarD.comboBox.removeItemAt(seleccionComboBox);
 				if (!modded.contains(seleccionComboBox)) {
 					vp.tareas.get(seleccionComboBox)
 							.addRestante(Integer.parseInt(cambiarD.IntroducirHorasRestantes.getText()));
@@ -96,6 +96,7 @@ public class ControladorSecundario implements ActionListener {
 			int dia = establecerF.dateChooser.getCalendar().get(java.util.Calendar.DATE);
 			String fechaAct=dia+"/"+mes+"/"+anio;
 			vp.setDiaActual(fechaAct);
+			vp.FechaDeInicio=fechaAct;
 			vp.setDuracion( Integer.parseInt(establecerF.textField.getText()) );
 			establecerF.setVisible(false);
 			break;
