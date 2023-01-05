@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Modelo.Fecha;
 import Modelo.Tarea;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -21,15 +23,15 @@ public class VistaGrafica extends JFrame {
 	public JPanel contentPane;
 	public JLabel lblNewLabel;
 	public ArrayList<Tarea> tareas;
-	public Date inicial;
-	public Date actual;
+	public Fecha inicial;
+	public Fecha actual;
 	public int limite;
 
-	public VistaGrafica(Date inicial, int dias, ArrayList<Tarea> tareas) {
+	public VistaGrafica(Fecha inicial, int dias, ArrayList<Tarea> tareas, Fecha actual) {
 		this.tareas = tareas;
 		this.inicial = inicial;
-		this.actual = new Date(System.currentTimeMillis());
-		limite = dias;
+		this.limite = dias;
+		this.actual = actual;
 		repaint();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -62,7 +64,7 @@ public class VistaGrafica extends JFrame {
 		g.drawLine(50, 80, 50+(550/limite)*(limite-1), 300);
 		g.setColor(Color.green);
 		int milisecondsByDay = 86400000;
-		int diastranscurridos = (int)((actual.getTime()) - (inicial.getTime()) / milisecondsByDay);
+		int diastranscurridos = actual.getNumDiasTotales() - inicial.getNumDiasTotales();
 		for	(int i = 0; i < diastranscurridos; i++) {
 			int cantidad = 0;
 			for (int j = 0; j < tareas.size(); j++)

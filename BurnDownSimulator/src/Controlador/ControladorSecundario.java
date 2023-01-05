@@ -6,6 +6,7 @@ import java.util.Calendar;
 
 import javax.swing.JOptionPane;
 
+import Modelo.Fecha;
 import Modelo.Tarea;
 import Vista.CambiarDeDia;
 import Vista.EstablecerFechas;
@@ -94,9 +95,7 @@ public class ControladorSecundario implements ActionListener {
 			int anio = establecerF.dateChooser.getCalendar().get(java.util.Calendar.YEAR);
 			int mes = establecerF.dateChooser.getCalendar().get(java.util.Calendar.MONTH)+1;
 			int dia = establecerF.dateChooser.getCalendar().get(java.util.Calendar.DATE);
-			String fechaAct=dia+"/"+mes+"/"+anio;
-			vp.setDiaActual(fechaAct);
-			vp.FechaDeInicio=fechaAct;
+			vp.setDiaActual(new Fecha(dia, mes, anio));
 			vp.setDuracion( Integer.parseInt(establecerF.textField.getText()) );
 			establecerF.setVisible(false);
 			break;

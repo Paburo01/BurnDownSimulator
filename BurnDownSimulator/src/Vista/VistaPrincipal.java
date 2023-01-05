@@ -10,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 
+import Modelo.Fecha;
 import Modelo.Tarea;
 public class VistaPrincipal extends javax.swing.JFrame{
 
@@ -25,8 +26,8 @@ public class VistaPrincipal extends javax.swing.JFrame{
 	public JTable table;
 	public DefaultTableModel modeloTabla;
 	public ArrayList<Tarea> tareas;
-	public String diaActual;
-	public String FechaDeInicio;
+	public Fecha diaActual;
+	public Fecha FechaDeInicio;
 	public int duracion;
 	//nombre fichero
 	public String nombre;
@@ -37,7 +38,7 @@ public class VistaPrincipal extends javax.swing.JFrame{
 	 */
 	public VistaPrincipal() {
 		//prueba---borrar
-		setDiaActual("22/12/22");
+		setDiaActual(new Fecha(22,12,22));
 		//------------------
 		modeloTabla = new DefaultTableModel(){
         @Override
@@ -131,11 +132,11 @@ public class VistaPrincipal extends javax.swing.JFrame{
         }
 	}
 
-	public String getDiaActual() {
+	public Fecha getDiaActual() {
 		return diaActual;
 	}
 
-	public void setDiaActual(String diaActual) {
+	public void setDiaActual(Fecha diaActual) {
 		this.diaActual = diaActual;
 	}
 

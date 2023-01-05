@@ -20,6 +20,7 @@ import Vista.VistaGrafica;
 import Vista.VistaPrincipal;
 import Vista.VistaTareas;
 import Vista.VisualizacionTarea;
+import Modelo.Fecha;
 import Modelo.Tarea;
 
 public class ControladorPrincipal implements ActionListener {
@@ -29,8 +30,9 @@ public class ControladorPrincipal implements ActionListener {
 	private CambiarDeDia cambiarD;
 	private ControladorSecundario controladorS;
 	private VistaTareas vTareas;
-	private Date inicial;
 	private EstablecerFechas establecerF;
+	private Fecha inicio;
+	private Fecha actual;
 	
 	public ControladorPrincipal(){
 		this.vp = new VistaPrincipal();
@@ -106,21 +108,17 @@ public class ControladorPrincipal implements ActionListener {
 			case "Pasar de día":
 				cambiarD= new CambiarDeDia();
 				controladorS= new ControladorSecundario(vp, cambiarD, vTareas);
-				cambiarD.lblNewLabel_2.setText(vp.diaActual);
+				cambiarD.lblNewLabel_2.setText(vp.diaActual.toString());
 				for(int i=0; i<vp.tareas.size(); i++) {
 					cambiarD.comboBox.addItem(vp.tareas.get(i).getTarea());
 				}
 				cambiarD.setVisible(true);
+				actual.diaSig();
 				break;
 			case "Visualizar gráficos":
-				SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-			try {
-				inicial = date.parse("2023-01-02");
-			} catch (ParseException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-				VistaGrafica f = new VistaGrafica(inicial, 10, vp.tareas);
+				inicio = new Fecha(1,1,2023);
+				actual = new Fecha (2,1,2023);
+				VistaGrafica f = new VistaGrafica(inicio, 10, vp.tareas, actual);
 				f.setVisible(true);
 				break;
 		}
