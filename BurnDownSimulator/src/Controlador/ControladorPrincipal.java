@@ -145,7 +145,7 @@ public class ControladorPrincipal implements ActionListener {
 						}
 						datos+="\n";
 				}
-				
+				////
 				datos += "-1\n"
 		                + "EOF";
 				
