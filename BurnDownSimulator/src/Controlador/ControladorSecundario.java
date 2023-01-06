@@ -96,6 +96,7 @@ public class ControladorSecundario implements ActionListener {
 			int mes = establecerF.dateChooser.getCalendar().get(java.util.Calendar.MONTH)+1;
 			int dia = establecerF.dateChooser.getCalendar().get(java.util.Calendar.DATE);
 			vp.setDiaActual(new Fecha(dia, mes, anio));
+			vp.FechaDeInicio=new Fecha(dia, mes, anio);
 			vp.setDuracion( Integer.parseInt(establecerF.textField.getText()) );
 			establecerF.setVisible(false);
 			break;

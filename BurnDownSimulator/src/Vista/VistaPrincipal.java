@@ -30,7 +30,7 @@ public class VistaPrincipal extends javax.swing.JFrame{
 	public Fecha FechaDeInicio;
 	public int duracion;
 	//nombre fichero
-	public String nombre;
+	public String nombre="prueba";
 	
 	
 	/**
