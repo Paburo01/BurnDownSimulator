@@ -64,7 +64,7 @@ public class ControladorSecundario implements ActionListener {
 					modded.add(seleccionComboBox);
 					if (Integer.parseInt(cambiarD.IntroducirHorasRestantes.getText()) == 0)
 						vp.tareas.get(seleccionComboBox).setEstado("Finalizado");
-					else vp.tareas.get(seleccionComboBox).setEstado("En progreso");
+					else vp.tareas.get(seleccionComboBox).setEstado("En_progreso");
 				}
 			}else {
 				JOptionPane.showMessageDialog(null, "Las horas introducidas tiene que ser menor que las horas que le quedan a la tarea",

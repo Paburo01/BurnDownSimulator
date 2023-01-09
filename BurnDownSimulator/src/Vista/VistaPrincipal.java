@@ -40,6 +40,9 @@ public class VistaPrincipal extends javax.swing.JFrame{
 		//prueba---borrar
 		setDiaActual(new Fecha(22,12,22));
 		//------------------
+		FechaDeInicio=new Fecha();
+		FechaDeInicio=new Fecha();
+		
 		modeloTabla = new DefaultTableModel(){
         @Override
         public boolean isCellEditable(int row, int column){

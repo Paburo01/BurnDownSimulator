@@ -7,6 +7,12 @@ public final class Fecha implements Cloneable {
     private int mes;
     private int anio;
     
+    public Fecha() {
+        this.dia=0;
+        this.mes=0;
+        this.anio=0;
+    }
+    
     public Fecha(final int dia, final int mes, final int anio) {
         this.setFecha(dia, mes, anio);
     }

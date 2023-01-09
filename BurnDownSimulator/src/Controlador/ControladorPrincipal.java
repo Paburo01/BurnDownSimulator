@@ -56,7 +56,7 @@ public class ControladorPrincipal implements ActionListener {
 				boolean resultado = false;
 		        int check = 0;
 		        JFileChooser selector = new JFileChooser();
-		        FileNameExtensionFilter filter = new FileNameExtensionFilter("AUTO", "auto");
+		        FileNameExtensionFilter filter = new FileNameExtensionFilter("TSP", "tsp");
 		        selector.setFileFilter(filter);
 		        selector.setCurrentDirectory(new File(System.getProperty("user.dir")));
 
@@ -66,8 +66,8 @@ public class ControladorPrincipal implements ActionListener {
 		            File fichero = selector.getSelectedFile();
 		            String[] nombre = fichero.getName().split("\\.");
 
-		            if (nombre[1].equals("TSP")) {
-
+		            if (nombre[1].equals("tsp")) {
+		            	System.out.println("hola");
 		                    try (FileReader fr = new FileReader(fichero); BufferedReader br = new BufferedReader(fr)) {
 		                        String lineaActual;
 		                        int lineasLeidas = 0;
@@ -87,14 +87,35 @@ public class ControladorPrincipal implements ActionListener {
 		                                    vp.duracion=Integer.parseInt(linea[1]);
 		                                    check++;
 		                                    break;
-		                                case "Tareas:":
-		                                	
-		                                	
+		                                case "TAREAS:":        	
 		                                    check++;
 		                                    break;
-		                                case "FIN":
+		                                case "EOF":
 		                                    check++;
 		                                    break;
+		                                    
+		                                default:
+		                                	String Tarea[] = lineaActual.split(" ");
+		                                	Tarea tarea=new Tarea();
+		                                	tarea.setID(Integer.parseInt(Tarea[0]));
+		                                	
+		                                	
+		                                	tarea.setTarea(Tarea[1]);
+		                                	tarea.setTipo(Tarea[2]);
+		                                	tarea.setEstado(Tarea[3]);
+		                                	tarea.setResponsable(Tarea[4]);
+		                                	
+		                                	
+		                                	ArrayList<Integer> horasRestantes = new ArrayList();
+		                                    String[] datos = Tarea[5].split(",");
+		                                    
+		                                    for (String dato1 : datos) {
+		                                    	tarea.addRestante(Integer.parseInt(dato1));
+		                                    }
+	
+		                                    vp.tareas.add(tarea);
+		                           
+		                                	break;
 
 		                            }
 		                        }
@@ -110,8 +131,8 @@ public class ControladorPrincipal implements ActionListener {
 		        } else if (result == JFileChooser.CANCEL_OPTION) {
 		            System.out.println("error" + "No se ha seleccionado ningún fichero.");
 		        }
-				
-				
+				//System.out.print(" aqui "+vp.tareas.get(0).getTarea());
+				vp.actualizarTabla();
 				break;
 			case "Añadir tarea":
 				vTareas = new VistaTareas();
@@ -126,28 +147,27 @@ public class ControladorPrincipal implements ActionListener {
 				break;
 			case "Guardar pila":
 				String datos = 
-				"NAME : " + vp.nombre+"\n"
-				+"FECHA_DE_INICIO: " + vp.FechaDeInicio.getDia()+ vp.FechaDeInicio.getMes() + vp.FechaDeInicio.getAnio()
+				"NAME: " + vp.nombre+"\n"
+				+"FECHA_DE_INICIO: " + vp.FechaDeInicio.getDia()+" "+ vp.FechaDeInicio.getMes()+" "+ vp.FechaDeInicio.getAnio()
                 + "\nDURACION: " + vp.getDuracion()
 				 +"\nTAREAS: "+"\n";
 				for(int i=0; i<vp.tareas.size();i++) {
-						datos += vp.tareas.get(i).getID() + " - " + 
-					    vp.tareas.get(i).getTarea() + " - " + 
-						vp.tareas.get(i).getTipo() + " - " +
-					    vp.tareas.get(i).getEstado() + " - " +
-						vp.tareas.get(i).getResponsable() + " - ";
+						datos += vp.tareas.get(i).getID() + " " + 
+					    vp.tareas.get(i).getTarea() + " " + 
+						vp.tareas.get(i).getTipo() + " " +
+					    vp.tareas.get(i).getEstado() + " " +
+						vp.tareas.get(i).getResponsable() + " ";
 						for(int j=0; j<vp.tareas.get(i).getRestante().size() ;j++) {
 							datos += vp.tareas.get(i).getRestante().get(j); 
 							if(j+1<vp.tareas.get(i).getRestante().size()) {
-								datos +=" * ";
+								datos +=",";
 							}
 							
 						}
 						datos+="\n";
 				}
 				
-				datos += "-1\n"
-		                + "EOF";
+				datos += "EOF";
 				
 				File file = new File("./",vp.nombre+ ".tsp");
 				
