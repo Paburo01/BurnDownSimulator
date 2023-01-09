@@ -166,8 +166,14 @@ public class ControladorPrincipal implements ActionListener {
 						}
 						datos+="\n";
 				}
+<<<<<<< HEAD
 				
 				datos += "EOF";
+=======
+				////
+				datos += "-1\n"
+		                + "EOF";
+>>>>>>> refs/remotes/origin/master
 				
 				File file = new File("./",vp.nombre+ ".tsp");
 				
