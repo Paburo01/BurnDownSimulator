@@ -10,6 +10,7 @@ import Modelo.Fecha;
 import Modelo.Tarea;
 import Vista.CambiarDeDia;
 import Vista.EstablecerFechas;
+import Vista.VistaNuevaPila;
 import Vista.VistaPrincipal;
 import Vista.VistaTareas;
 
@@ -23,6 +24,7 @@ public class ControladorSecundario implements ActionListener {
 	private int currentID;
 	private ArrayList<Integer> modded;
 	private EstablecerFechas establecerF;
+	private VistaNuevaPila vNueva;
 
 	ControladorSecundario() {
 		addListener();
@@ -30,10 +32,12 @@ public class ControladorSecundario implements ActionListener {
 		currentID = 0;
 	}
 
-	ControladorSecundario(VistaPrincipal vp, CambiarDeDia cambiarD, VistaTareas vTareas) {
+	ControladorSecundario(VistaPrincipal vp, CambiarDeDia cambiarD, VistaTareas vTareas, int currentID, VistaNuevaPila vNueva) {
 		this.cambiarD = cambiarD;
 		this.vp = vp;
 		this.vTareas = vTareas;
+		this.currentID = currentID;
+		this.vNueva = vNueva;
 		modded = new ArrayList<Integer>();
 		addListener();
 	}
@@ -56,15 +60,15 @@ public class ControladorSecundario implements ActionListener {
 			break;
 		case "Actualizar Tarea":
 			int seleccionComboBox = cambiarD.comboBox.getSelectedIndex();
-			if(Integer.parseInt(cambiarD.IntroducirHorasRestantes.getText()) < vp.tareas.get(seleccionComboBox).getRestanteUltimo()) {
-				cambiarD.comboBox.removeItemAt(seleccionComboBox);
+			if(Integer.parseInt(cambiarD.IntroducirHorasRestantes.getText()) <= vp.tareas.get(seleccionComboBox).getRestanteUltimo()) {
 				if (!modded.contains(seleccionComboBox)) {
 					vp.tareas.get(seleccionComboBox)
 							.addRestante(Integer.parseInt(cambiarD.IntroducirHorasRestantes.getText()));
 					modded.add(seleccionComboBox);
 					if (Integer.parseInt(cambiarD.IntroducirHorasRestantes.getText()) == 0)
 						vp.tareas.get(seleccionComboBox).setEstado("Finalizado");
-					else vp.tareas.get(seleccionComboBox).setEstado("En_progreso");
+					else vp.tareas.get(seleccionComboBox).setEstado("En progreso");
+					//cambiarD.comboBox.removeItemAt(seleccionComboBox);
 				}
 			}else {
 				JOptionPane.showMessageDialog(null, "Las horas introducidas tiene que ser menor que las horas que le quedan a la tarea",
@@ -100,6 +104,14 @@ public class ControladorSecundario implements ActionListener {
 			vp.setDuracion( Integer.parseInt(establecerF.textField.getText()) );
 			establecerF.setVisible(false);
 			break;
+		case "Crear_pila":
+			int anio_n = vNueva.dateChooser.getCalendar().get(java.util.Calendar.YEAR);
+			int mes_n = vNueva.dateChooser.getCalendar().get(java.util.Calendar.MONTH)+1;
+			int dia_n = vNueva.dateChooser.getCalendar().get(java.util.Calendar.DATE);
+			vp.setDiaActual(new Fecha(dia_n, mes_n, anio_n));
+			vp.FechaDeInicio=new Fecha(dia_n, mes_n, anio_n);
+			vp.setDuracion(Integer.parseInt(vNueva.textField.getText()));
+			vNueva.setVisible(false);
 		}
 	}
 
@@ -113,5 +125,7 @@ public class ControladorSecundario implements ActionListener {
 		if(establecerF != null) {
 			establecerF.btnNewButton.addActionListener(this);
 		}
+		if(vNueva != null)
+			vNueva.btnNewButton.addActionListener(this);
 	}
 }

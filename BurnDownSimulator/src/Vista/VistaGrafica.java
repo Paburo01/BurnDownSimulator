@@ -52,24 +52,35 @@ public class VistaGrafica extends JFrame {
 	}
 
 	public void paint(Graphics g) {
-		int total = 0;
-		for (int i = 0; i < tareas.size(); i++)
-			total += tareas.get(i).getRestante(0);
+		int cantidadAnterior = 0;
 		g.setColor(Color.black);
 		g.drawLine(50,80,50,300);
 		g.drawLine(50, 300, 550, 300);
+		g.drawString("PROGRESO DÍAS " + inicial.getDia() + "/" + inicial.getMes() + 
+				"/" + inicial.getAnio() + " - " + actual.getDia() + "/" + 
+				actual.getMes() + "/" + actual.getAnio(), 180, 65);
 		for (int i = 0; i < limite; i++)
 			g.drawLine(50+(550/limite)*i, 300, 50+(550/limite)*i, 305);
 		g.setColor(Color.orange);
-		g.drawLine(50, 80, 50+(550/limite)*(limite-1), 300);
+		int total = 0;
+		for (int j = 0; j < tareas.size(); j++)
+			total += tareas.get(j).getRestante(0);
+		g.drawLine(50, 300-(total), 50+(550/limite)*(limite-1), 300);
+		g.drawString("Progresión ideal", 50, 330);
 		g.setColor(Color.green);
-		int milisecondsByDay = 86400000;
-		int diastranscurridos = actual.getNumDiasTotales() - inicial.getNumDiasTotales();
+		g.drawString("Progresión actual", 50, 360);
+		int diastranscurridos = actual.getNumDiasTotales() - inicial.getNumDiasTotales() + 1;
 		for	(int i = 0; i < diastranscurridos; i++) {
 			int cantidad = 0;
 			for (int j = 0; j < tareas.size(); j++)
 				cantidad += tareas.get(j).getRestante(i);
 			g.drawOval(50+(550/limite)*i, 300-cantidad, 5, 5);
+			if (i == 0)
+				cantidadAnterior = cantidad;
+			if (i != 0) {
+				g.drawLine(50+(550/limite)*(i-1), 300-cantidadAnterior, 50+(550/limite)*i, 300-cantidad);
+				cantidadAnterior = cantidad;
+			}
 		}
 	}
 	

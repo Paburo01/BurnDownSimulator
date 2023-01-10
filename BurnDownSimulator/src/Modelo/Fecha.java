@@ -75,22 +75,19 @@ public final class Fecha implements Cloneable {
     }
     
     public Fecha diaSig() {
-        final Fecha fecha;
-        final Fecha f = fecha = (Fecha)this.clone();
-        ++fecha.dia;
+        Fecha fecha;
+        fecha = (Fecha)this.clone();
+        fecha.dia++;
         final int[] maxDias = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-        if (f.dia > maxDias[f.mes]) {
-            final Fecha fecha2 = f;
-            fecha2.dia -= maxDias[f.mes];
-            final Fecha fecha3 = f;
-            ++fecha3.mes;
-            if (f.mes > 12) {
-                f.mes = 1;
-                final Fecha fecha4 = f;
-                ++fecha4.anio;
-            }
+        if (fecha.dia > maxDias[fecha.mes]) {
+        	fecha.dia = 1;
+        	fecha.mes++;
+        	if (fecha.mes > 12) {
+        		fecha.mes = 1;
+        		fecha.anio++;
+        	}
         }
-        return f;
+        return fecha;
     }
     
     public static boolean mayor(final Fecha f1, final Fecha f2) {

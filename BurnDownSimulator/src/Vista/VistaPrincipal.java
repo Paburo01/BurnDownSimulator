@@ -38,10 +38,9 @@ public class VistaPrincipal extends javax.swing.JFrame{
 	 */
 	public VistaPrincipal() {
 		//prueba---borrar
+		setFechaInicio(new Fecha(22,12,22));
 		setDiaActual(new Fecha(22,12,22));
 		//------------------
-		FechaDeInicio=new Fecha();
-		FechaDeInicio=new Fecha();
 		
 		modeloTabla = new DefaultTableModel(){
         @Override
@@ -141,6 +140,10 @@ public class VistaPrincipal extends javax.swing.JFrame{
 
 	public void setDiaActual(Fecha diaActual) {
 		this.diaActual = diaActual;
+	}
+	
+	public void setFechaInicio(Fecha fechaInicio) {
+		this.FechaDeInicio = fechaInicio;
 	}
 
 	public int getDuracion() {
