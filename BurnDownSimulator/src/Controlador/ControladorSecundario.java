@@ -67,7 +67,7 @@ public class ControladorSecundario implements ActionListener {
 					modded.add(seleccionComboBox);
 					if (Integer.parseInt(cambiarD.IntroducirHorasRestantes.getText()) == 0)
 						vp.tareas.get(seleccionComboBox).setEstado("Finalizado");
-					else vp.tareas.get(seleccionComboBox).setEstado("En progreso");
+					else vp.tareas.get(seleccionComboBox).setEstado("En_progreso");
 					//cambiarD.comboBox.removeItemAt(seleccionComboBox);
 				}
 			}else {
@@ -111,6 +111,7 @@ public class ControladorSecundario implements ActionListener {
 			vp.setDiaActual(new Fecha(dia_n, mes_n, anio_n));
 			vp.FechaDeInicio=new Fecha(dia_n, mes_n, anio_n);
 			vp.setDuracion(Integer.parseInt(vNueva.textField.getText()));
+			vp.nombre = vNueva.textField_1.getText();
 			vNueva.setVisible(false);
 		}
 	}

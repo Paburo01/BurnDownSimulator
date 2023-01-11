@@ -72,7 +72,6 @@ public class ControladorPrincipal implements ActionListener {
 				String[] nombre = fichero.getName().split("\\.");
 
 				if (nombre[1].equals("tsp")) {
-					System.out.println("hola");
 					try (FileReader fr = new FileReader(fichero); BufferedReader br = new BufferedReader(fr)) {
 						String lineaActual;
 						int lineasLeidas = 0;
@@ -132,7 +131,6 @@ public class ControladorPrincipal implements ActionListener {
 				System.out.println("error" + "No se ha seleccionado ningún fichero.");
 			}
 			pilaAbierta = true;
-			// System.out.print(" aqui "+vp.tareas.get(0).getTarea());
 			vp.actualizarTabla();
 			break;
 		case "Añadir tarea":
@@ -152,7 +150,6 @@ public class ControladorPrincipal implements ActionListener {
 			break;
 		case "Establecer fechas":
 			if (pilaAbierta) {
-				// date.parse(cadena de texto);
 				establecerF = new EstablecerFechas();
 				controladorS = new ControladorSecundario(vp, establecerF);
 				establecerF.setVisible(true);
@@ -180,7 +177,6 @@ public class ControladorPrincipal implements ActionListener {
 				}
 
 				datos += "EOF";
-				datos += "-1\n" + "EOF";
 
 				File file = new File("./", vp.nombre + ".tsp");
 

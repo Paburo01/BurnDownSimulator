@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>BurnDownSimulator/src/Datos/Ejemplo_de_proyecto.tsp</name>
+			<type>1</type>
+			<locationURI>PROJECT_LOC/Ejemplo_de_proyecto.tsp</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>
